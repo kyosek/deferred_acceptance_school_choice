@@ -29,7 +29,6 @@ def test_deferred_acceptance():
         schools_df=schools_df,
         schools_quota=schools_quota
     )
-    print(matches)
 
     assert_dict_equal(
         matches,
