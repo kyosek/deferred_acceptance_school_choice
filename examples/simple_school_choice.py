@@ -1,13 +1,10 @@
-import pandas as pd
 from deferred_acceptance.deferred_acceptance import deferred_acceptance
 from deferred_acceptance.utils.data_construct import create_dataframes
 
 
 def simple_school_choice() -> None:
     """
-    Here is a simple shcool choice example. This example shows the
-    Students' preference over schools:
-
+    Here is a minimalistic example of deferred acceptance algorithm for school choice.
     """
     # Prepare the dataframes
     students_list = ['a', 'b', 'c', 'd']

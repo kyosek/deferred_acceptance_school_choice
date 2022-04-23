@@ -7,7 +7,7 @@ def deferred_acceptance(
         students_df: pd.DataFrame,
         schools_df: pd.DataFrame,
         schools_quota: dict,
-        vorbose:int = 0
+        verbose: int = 0
 ) -> dict:
     """
     The deferred acceptance algorithm implementation. The process would be following:
@@ -18,12 +18,12 @@ def deferred_acceptance(
     :param students_df: students dataframe
     :param schools_df: schools dataframe
     :param schools_quota:
-    :param vorbose:
+    :param verbose:
     :return:
     """
 
     # Create the initial environments for matching
-    available_school = {student: students_df.columns for student in students_df.index}
+    available_school = {student: list(students_df.columns.values) for student in list(students_df.index.values)}
     students_stack = []
     matches = {}
     itr_count = 0
@@ -53,7 +53,7 @@ def deferred_acceptance(
 
                 for p_to_drop in pairs_to_drop:
                     del matches[p_to_drop[0]]
-                    _school = copy(available_school[p_to_drop[0][0]]).to_list()
+                    _school = copy(available_school[p_to_drop[0][0]])
                     _school.remove(p_to_drop[0][1])
                     available_school[p_to_drop[0][0]] = _school
         # student who successfully created pairs must be added to the waiting list
