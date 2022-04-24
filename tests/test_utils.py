@@ -1,45 +1,50 @@
 import pandas as pd
 from pandas._testing import assert_frame_equal
-from deferred_acceptance.utils import create_dataframes
+
+from deferred_acceptance.utils import create_dataframes, strict_preference_check
+
+
+def test_strict_preference_check():
+    # Won't be able to properly test it
+    students_list = ["a", "b", "c", "d"]
+    students_preferences = {
+        "a": [1, 2, 3],
+        "b": [2, 3, 1],
+        "c": [3, 2, 1],
+        "d": [2, 1, 3],
+    }
+
+    strict_preference_check(students_list, students_preferences)
 
 
 def test_create_dataframes():
     expected_students_df = pd.DataFrame(
-        {
-            "A": [1, 2, 3, 2],
-            "B": [2, 3, 2, 1],
-            "C": [3, 1, 1, 3]
-        },
-        index=["a", "b", "c", "d"]
+        {"A": [1, 2, 3, 2], "B": [2, 3, 2, 1], "C": [3, 1, 1, 3]},
+        index=["a", "b", "c", "d"],
     )
 
     expected_schools_df = pd.DataFrame(
-        {
-            "A": [1, 2, 3, 4],
-            "B": [1, 3, 2, 4],
-            "C": [2, 3, 4, 1]
-        },
-        index=["a", "b", "c", "d"]
+        {"A": [1, 2, 3, 4], "B": [1, 3, 2, 4], "C": [2, 3, 4, 1]},
+        index=["a", "b", "c", "d"],
     )
 
-    students_list = ['a', 'b', 'c', 'd']
-    schools_list = ['A', 'B', 'C']
-    students_preferences = {'a': [1, 2, 3], 'b': [2, 3, 1], 'c': [3, 2, 1], 'd': [2, 1, 3]}
-    schools_preferences = {'A': [1, 2, 3, 4], 'B': [1, 3, 2, 4], 'C': [2, 3, 4, 1]}
+    students_list = ["a", "b", "c", "d"]
+    schools_list = ["A", "B", "C"]
+    students_preferences = {
+        "a": [1, 2, 3],
+        "b": [2, 3, 1],
+        "c": [3, 2, 1],
+        "d": [2, 1, 3],
+    }
+    schools_preferences = {"A": [1, 2, 3, 4], "B": [1, 3, 2, 4], "C": [2, 3, 4, 1]}
 
     students_df, schools_df = create_dataframes(
         students_list=students_list,
         students_preferences=students_preferences,
         schools_list=schools_list,
-        schools_preferences=schools_preferences
+        schools_preferences=schools_preferences,
     )
 
-    assert_frame_equal(
-        students_df,
-        expected_students_df
-    )
+    assert_frame_equal(students_df, expected_students_df)
 
-    assert_frame_equal(
-        schools_df,
-        expected_schools_df
-    )
+    assert_frame_equal(schools_df, expected_schools_df)
