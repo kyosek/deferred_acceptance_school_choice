@@ -1,7 +1,11 @@
 import pandas as pd
 from pandas._testing import assert_frame_equal
 
-from deferred_acceptance.utils import create_dataframes, strict_preference_check
+from deferred_acceptance.utils import (
+    create_dataframes,
+    strict_preference_check,
+    tie_break,
+)
 
 
 def test_strict_preference_check():
@@ -48,3 +52,20 @@ def test_create_dataframes():
     assert_frame_equal(students_df, expected_students_df)
 
     assert_frame_equal(schools_df, expected_schools_df)
+
+
+def test_tie_break():
+    schools_df = pd.DataFrame(
+        {
+            "A": [1, 1, 2, 2],
+            "B": [2, 1, 1, 2],
+            "C": [1, 3, 3, 3],
+        },
+        index=["a", "b", "c", "d"],
+    )
+
+    new_schools_df = tie_break(schools_df)
+
+    assert new_schools_df["A"].nunique() == 4
+    assert new_schools_df["B"].nunique() == 4
+    assert new_schools_df["C"].nunique() == 4

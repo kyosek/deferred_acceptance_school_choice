@@ -1,5 +1,7 @@
+from random import randrange
 from typing import Tuple
 
+import numpy as np
 import pandas as pd
 
 
@@ -44,3 +46,46 @@ def create_dataframes(
     schools_df.index = students_list
 
     return students_df, schools_df
+
+
+def tie_break(schools_df: pd.DataFrame) -> pd.DataFrame:
+    """
+    This function randomly breaks the indifferent schools' preference over students
+    and make their preference strict.
+
+    Iterations:
+    0. iterate through each school's preference
+    1. create a subset that contains the same ranked students
+    2. randomly order students in the same rank until all the students get the unique rank
+    3. merge all of students with new order and assign new rank to them
+    4. merge all the schools' preferences
+
+    :param schools_df:
+    :return:
+    """
+    new_schools_df = pd.DataFrame()
+    # 0.
+    for school in schools_df.columns:
+        new_rank = pd.Series(dtype="int32")
+
+        # 1.
+        for rank in sorted(schools_df[school].unique()):
+            allocated_ranks = []
+            sub_df = schools_df.loc[schools_df[school] == rank, school]
+
+            # 2.
+            for student in sub_df.index:
+                lottery = randrange(len(sub_df))
+                while lottery in allocated_ranks:
+                    lottery = randrange(len(sub_df))
+                sub_df.loc[[student]] = lottery
+                allocated_ranks.append(lottery)
+            # 3.
+            new_rank = pd.concat([new_rank, sub_df.sort_values()])
+
+        # 4.
+        new_rank_df = pd.DataFrame(new_rank, columns=[school])
+        new_rank_df[school] = np.arange(len(new_rank))
+        new_schools_df[school] = new_rank_df[school]
+
+    return new_schools_df
