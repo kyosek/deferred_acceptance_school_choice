@@ -1,5 +1,6 @@
 from collections import Counter
 from copy import copy
+from typing import Optional
 
 import pandas as pd
 
@@ -8,7 +9,7 @@ def deferred_acceptance(
     students_df: pd.DataFrame,
     schools_df: pd.DataFrame,
     schools_quota: dict,
-    verbose: int = 0,
+    verbose: Optional[int] = 0,
 ) -> dict:
     """
     The deferred acceptance algorithm implementation.
@@ -19,8 +20,8 @@ def deferred_acceptance(
 
     :param students_df: students dataframe
     :param schools_df: schools dataframe
-    :param schools_quota:
-    :param verbose:
+    :param schools_quota: students quota in each schools
+    :param verbose: verbose=0 (silent), else shows the number of iterations
     :return:
     """
 
@@ -66,5 +67,8 @@ def deferred_acceptance(
 
         students_stack = [student[0] for student in matches.keys()]
         itr_count += 1
+
+    if verbose != 0:
+        print(f"Number of iterations: {itr_count}")
 
     return matches
