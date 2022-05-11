@@ -18,11 +18,13 @@ def deferred_acceptance(
     2. Start matching
     3. Count applications in school
 
-    :param students_df: students dataframe
-    :param schools_df: schools dataframe
-    :param schools_quota: students quota in each schools
-    :param verbose: verbose=0 (silent), else shows the number of iterations
-    :return:
+    Args:
+        students_df: students dataframe
+        schools_df: schools dataframe
+        schools_quota: students quota in each schools
+        verbose: verbose=0 (silent), else shows the number of iterations
+    Return:
+        dictionary of student - school matches
     """
 
     # Create the initial environments for matching
