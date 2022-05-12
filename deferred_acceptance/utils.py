@@ -1,4 +1,4 @@
-from random import randrange
+from random import randint
 from typing import Tuple
 
 import numpy as np
@@ -86,9 +86,9 @@ def tie_break(schools_df: pd.DataFrame) -> pd.DataFrame:
 
             # 2. Randomly order students in the same rank until all the students get the unique rank
             for student in sub_df.index:
-                lottery = randrange(len(sub_df))
+                lottery = randint(1, len(sub_df))
                 while lottery in allocated_ranks:
-                    lottery = randrange(len(sub_df))
+                    lottery = randint(1, len(sub_df))
                 sub_df.loc[[student]] = lottery
                 allocated_ranks.append(lottery)
 
