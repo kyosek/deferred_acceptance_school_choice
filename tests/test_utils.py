@@ -9,7 +9,7 @@ from deferred_acceptance.utils import (
 
 
 def test_strict_preference_check():
-    # Won't be able to properly test it
+    # Won't be able to properly test it as it doesn't return anything
     students_list = ["a", "b", "c", "d"]
     students_preferences = {
         "a": [1, 2, 3],
