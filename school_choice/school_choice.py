@@ -74,3 +74,37 @@ def deferred_acceptance(
         print(f"Number of iterations: {itr_count}")
 
     return matches
+
+
+def stable_improvement_cycle(
+    matches: dict,
+    students_df: pd.DataFrame,
+    schools_df: pd.DataFrame,
+    schools_quota: dict,
+) -> dict:
+    """
+    Stable improvement cycle implementation.
+
+    Process:
+    1. Iterate through each students
+    2. Check the rank of student and if it's not the highest possible ranked school
+    3. If not, refer that school's preference list against the student's and other matched students'
+    4. If the student's rank is higher than at least one of the matched students, trade the school
+    5. When there's no student who would be better off by trading, this iteration will be terminated
+
+    students_df: students dataframe
+    schools_df: schools dataframe
+    schools_quota: students quota in each schools
+    """
+    matched = {}
+    new_matches = {}
+
+    # 1.
+    for i in range(len(students_df) - 1):
+        student = list(matches)[i][0]
+        # 2. 3.
+        # if matches[list(matches)[i]][0] != 1:
+        # # Here, get the student's best school
+        #     best_school =
+
+    return {}

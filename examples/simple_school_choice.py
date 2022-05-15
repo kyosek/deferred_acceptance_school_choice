@@ -1,5 +1,5 @@
-from deferred_acceptance.deferred_acceptance import deferred_acceptance
-from deferred_acceptance.utils import create_dataframes
+from school_choice.school_choice import deferred_acceptance
+from school_choice.utils import create_dataframes
 
 
 def simple_school_choice() -> None:

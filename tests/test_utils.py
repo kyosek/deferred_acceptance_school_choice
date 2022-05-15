@@ -1,11 +1,7 @@
 import pandas as pd
 from pandas._testing import assert_frame_equal
 
-from deferred_acceptance.utils import (
-    create_dataframes,
-    strict_preference_check,
-    tie_break,
-)
+from school_choice.utils import create_dataframes, strict_preference_check, tie_break
 
 
 def test_strict_preference_check():

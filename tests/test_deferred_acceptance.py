@@ -1,7 +1,7 @@
 import pandas as pd
 from pandas._testing import assert_dict_equal
 
-from deferred_acceptance.deferred_acceptance import deferred_acceptance
+from school_choice.school_choice import deferred_acceptance
 
 
 def test_deferred_acceptance():

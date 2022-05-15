@@ -2,9 +2,9 @@ from school_choice.school_choice import deferred_acceptance
 from school_choice.utils import create_dataframes, tie_break
 
 
-def tie_break_school_choice() -> None:
+def stable_improvement_cycle_algorithm() -> None:
     """
-    This example shows how the deferred acceptance algorithm works with the random tie-breaking mechanism.
+    This example shows how the deferred acceptance algorithm works with the
     """
     # Prepare the dataframes
     students_list = ["a", "b", "c", "d"]
@@ -36,7 +36,16 @@ def tie_break_school_choice() -> None:
     )
 
     print(matches)
+    print("school")
+    print(schools_df)
+    print("new school")
+    print(strict_school_df)
+    print("student")
+    print(students_df)
+
+    # Run stable improvement cycle algorithm
+    print(list(matches)[0][0])
 
 
 if __name__ == "__main__":
-    tie_break_school_choice()
+    stable_improvement_cycle_algorithm()
