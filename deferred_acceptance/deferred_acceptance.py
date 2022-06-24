@@ -32,14 +32,14 @@ def deferred_acceptance(
         student: list(students_df.columns.values)
         for student in list(students_df.index.values)
     }
-    students_stack = []
+    unassigned_students = []
     matches = {}
     itr_count = 0
 
     # Start matching
-    while len(students_stack) < len(students_df):
+    while len(unassigned_students) < len(students_df):
         for student in students_df.index:
-            if student not in students_stack:
+            if student not in unassigned_students:
                 school = available_school[student]
                 best_choice = students_df.loc[student][
                     students_df.loc[student].index.isin(school)
@@ -67,7 +67,7 @@ def deferred_acceptance(
                     _school.remove(p_to_drop[0][1])
                     available_school[p_to_drop[0][0]] = _school
 
-        students_stack = [student[0] for student in matches.keys()]
+        unassigned_students = [student[0] for student in matches.keys()]
         itr_count += 1
 
     if verbose != 0:

@@ -17,16 +17,16 @@ def strict_preference_check(
         students_list: list of students
         students_preferences: students' preference dictionary
     """
-    hash_table = []
+    submitted_preference = []
 
     for student in students_list:
         for preference in students_preferences[student]:
-            if preference not in hash_table:
-                hash_table.append(preference)
+            if preference not in submitted_preference:
+                submitted_preference.append(preference)
             else:
                 raise ValueError("The student's preference must be strictly ordered")
 
-        hash_table = []
+        submitted_preference = []
 
 
 def create_dataframes(
@@ -66,7 +66,7 @@ def tie_break(schools_df: pd.DataFrame) -> pd.DataFrame:
     0. Iterate through each school's preference
     1. Create a subset that contains the same ranked students
     2. Randomly order students in the same rank until all the students get the unique rank
-    3. Merge all of students with new order and assign new rank to them
+    3. Merge all students with new order and assign new rank to them
     4. Merge all the schools' preferences
 
     Args:
@@ -92,7 +92,7 @@ def tie_break(schools_df: pd.DataFrame) -> pd.DataFrame:
                 sub_df.loc[[student]] = lottery
                 allocated_ranks.append(lottery)
 
-            # 3. Merge all of students with new order and assign new rank to them
+            # 3. Merge all students with new order and assign new rank to them
             new_rank = pd.concat([new_rank, sub_df.sort_values()])
 
         # 4. Merge all the schools' preferences
