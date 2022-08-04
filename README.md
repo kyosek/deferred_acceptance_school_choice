@@ -1,10 +1,9 @@
 # Deferred Acceptance algorithm for school choice
 Python implementation of Deferred Acceptance algorithm (Gale and Shapley, 1962) for school choice.
 
-The medium blog about this repo can be found [here](https://medium).
+The medium blog about this repo can be found [here](https://medium.com/@kyosuke1029/the-deferred-acceptance-da-algorithm-utilised-in-school-choice-with-python-afc0fe892921).
 ## Introduction
-The study of matching investigates matching between people, institutes, and goods. Starting with Gale and Shapley (1962)'s deferred acceptance (DA) algorithm, this has been successfully utilised in the real world, especially in the world of the school choice since early 2000s. This repo is a python implementation of the algorithm.
-
+The study of matching investigates stable matchings among people, institutes and goods. Starting with Gale and Shapley (1962)’s deferred acceptance (DA) algorithm, this study has been successfully utilised in the real world, especially in school choice since the early 2000s.
 This repo covers (so far):
 - DA algorithm for school choice (student optimal)
 - DA algorithm with random tie-break lotteries
